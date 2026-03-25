@@ -21,6 +21,7 @@ export const registerFormControls = [
     type: "password",
   },
 ];
+
 export const loginFormControls = [
   {
     name: "email",
@@ -37,3 +38,5 @@ export const loginFormControls = [
     type: "password",
   },
 ];
+
+
