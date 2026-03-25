@@ -9,24 +9,36 @@ import AdminFeatures from "./pages/admin-view/features";
 import AdminOrders from "./pages/admin-view/orders";
 import ShoppingLayout from "./components/shopping-view/layout";
 import NotFound from "./pages/not-found";
+import ShoppingHome from "./pages/shopping-view/home";
 import ShoppingListing from "./pages/shopping-view/listing";
 import ShoppingCheckout from "./pages/shopping-view/checkout";
 import ShoppingAccount from "./pages/shopping-view/account";
 import CheckAuth from "./components/common/check-auth";
 import UnauthPage from "./pages/unauth-page";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { checkAuth } from "./store/auth-slice";
+import { Skeleton } from "./components/ui/skeleton";
+
 
 
 function App() {
 
-    const isAuthenticated = false;
-    const user = null;
+  const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (isLoading) return <Skeleton className="w-[800px] bg-black h-[600px]" />;
+  console.log(isLoading, user);
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
 
-    <Routes>
-      <Route
+      <Routes>
+        <Route
           path="/"
           element={
             <CheckAuth
@@ -68,7 +80,8 @@ function App() {
                   <ShoppingLayout/>
                 </CheckAuth>
           }>
-
+          
+          <Route path="home" element={<ShoppingHome />} />
           <Route path="listing" element={<ShoppingListing/>} />
           <Route path="checkout" element={<ShoppingCheckout/>} />
           <Route path="account" element={<ShoppingAccount/>} />

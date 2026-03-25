@@ -1,8 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const dns = require("dns");
+const authRouter = require("./routes/auth/auth-routes");
 
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 mongoose.connect(
     "mongodb+srv://suprakashballav:suprakashballav1997@cluster123.7rygusb.mongodb.net/"
@@ -30,6 +33,7 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/api/auth", authRouter);
 
 
 app.listen(PORT, () => {
