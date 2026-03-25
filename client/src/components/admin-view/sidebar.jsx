@@ -3,7 +3,7 @@
 
 function AdminSideBar() {
     return (
-        <div>admin sidebar</div>
+        <div className="text-red-500">admin sidebar</div>
     );
 }
 
