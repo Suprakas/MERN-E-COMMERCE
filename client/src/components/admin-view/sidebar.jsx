@@ -33,10 +33,10 @@ function MenuItems({ setOpen }) {
     const navigate = useNavigate();
 
     return (
-        <nav className="mt-8 flex-col flex gap-2">
+        <nav className="mt-8 flex flex-col gap-2">
             {adminSidebarMenuItems.map((menuItem) => (
                 <div
-                    key={menuItem.id}
+                    key={menuItem.id} 
                     onClick={() => {
                         navigate(menuItem.path);
                         setOpen ? setOpen(false) : null;
@@ -53,6 +53,7 @@ function MenuItems({ setOpen }) {
 
 function AdminSideBar({ open, setOpen }) {
     const navigate = useNavigate();
+    console.log("Sidebar open state:", open); // Debugging log to check the open state
 
     return (
         <Fragment>
@@ -64,20 +65,15 @@ function AdminSideBar({ open, setOpen }) {
                                 <ChartNoAxesCombined size={30} />
                                 <span className="text-2xl font-extrabold">Admin Panel</span>
                             </SheetTitle>
-                            {/* Add description for accessibility */}
-                            <SheetDescription className="sr-only">
-                                Sidebar navigation for admin panel
-                            </SheetDescription>
                         </SheetHeader>
                         <MenuItems setOpen={setOpen} />
                     </div>
                 </SheetContent>
             </Sheet>
-            <aside className="hidden w-64 flex-col border-r bg-background p-6 lg:flex">
+            <aside className="w-64 flex-col border-r bg-background p-6 lg:flex">
                 <div
                     onClick={() => navigate("/admin/dashboard")}
-                    className="flex cursor-pointer items-center gap-2"
-                >
+                    className="flex cursor-pointer items-center gap-2">
                     <ChartNoAxesCombined size={30} />
                     <span className="text-2xl font-extrabold">Admin Panel</span>
                 </div>
